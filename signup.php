@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'id' => (int) database()->lastInsertId(),
                 'display_name' => $name,
                 'email' => $email,
+                'role' => 'member',
             ];
             redirect('index.php');
         } catch (PDOException $exception) {

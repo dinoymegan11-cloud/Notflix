@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($errors === []) {
         try {
-            $statement = database()->prepare('SELECT id, display_name, email, password_hash FROM users WHERE email = :email LIMIT 1');
+            $statement = database()->prepare('SELECT id, display_name, email, password_hash, role FROM users WHERE email = :email LIMIT 1');
             $statement->execute(['email' => $email]);
             $user = $statement->fetch();
             if ($user === false || !password_verify($password, $user['password_hash'])) {
@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'id' => (int) $user['id'],
                     'display_name' => $user['display_name'],
                     'email' => $user['email'],
+                    'role' => $user['role'],
                 ];
                 redirect('index.php');
             }

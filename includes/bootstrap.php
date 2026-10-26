@@ -47,6 +47,25 @@ function current_user(): ?array
         : null;
 }
 
+function require_admin(): array
+{
+    $user = current_user();
+    if ($user === null) {
+        redirect('login.php');
+    }
+
+    $statement = database()->prepare('SELECT role FROM users WHERE id = :id LIMIT 1');
+    $statement->execute(['id' => $user['id']]);
+    $role = $statement->fetchColumn();
+    if ($role !== 'admin') {
+        http_response_code(403);
+        exit('You do not have permission to access this page.');
+    }
+
+    $_SESSION['user']['role'] = $role;
+    return $_SESSION['user'];
+}
+
 function flash(string $key, ?string $message = null): ?string
 {
     if ($message !== null) {
