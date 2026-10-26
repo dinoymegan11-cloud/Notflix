@@ -34,3 +34,6 @@ Sign out and back in after changing the role so the Admin navigation link appear
 - The catalog and saved lists are read from MySQL; the sample poster artwork is hosted by TMDB and TVmaze. Homepage collections use horizontally scrollable title rails.
 - The app is a discovery catalog. Watch history records titles members manually mark as watched; playback/streaming rights and provider integrations are not included.
 - For a deployed site, create a dedicated MySQL user with only the permissions the app needs instead of using XAMPP's local `root` account.
+
+##Homepage Preview
+![NOTFLIX Homepage](notflix_preview%20.png)
